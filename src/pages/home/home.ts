@@ -35,18 +35,31 @@ export class HomePage {
 
 	ngAfterViewInit() {
 
+
+		  let svgCanvas = document.getElementById("svgCanvas");
+		  svgCanvas.style.height = (document.documentElement.clientHeight - 50).toString() + 'px';
+		  svgCanvas.style.width = document.documentElement.clientWidth.toString() + 'px';
+
+		  //Finding devices bottom tab height for use in calculating svgCanvase height
+		  // let tabbar = document.getElementsByClassName("tabbar");
+		  // let tabbarH = tabbar[0].offsetHeight;
+
+		  // console.log(tabbar); 
+		  // console.log(tabbarH); 
+
+		  let logo = document.getElementById("spinLogo");
+		  let logoCX = '0'; //logo center x-axis
+		  let logoCY = '0'; //logo center y-axis
+
+		  let logoR = '0'; //logo radius
+
+		  logo.setAttributeNS(null, "cx", (document.documentElement.clientWidth / 2).toString());
+		  logo.setAttributeNS(null, "cy", (document.documentElement.clientHeight / 2).toString());
+
 		// Listen for device motion
 		window.addEventListener('devicemotion', function(event) {
 		  let acc = event.acceleration; // returns as meters per second^2
 		  let lastSpin = parseFloat(document.getElementById('lastSpin').innerHTML);
-
-		  let svgCanvas = document.getElementById("svgCanvas"); 
-
-		  let logo = document.getElementById("spinLogo");
-		  // let logoJ = $('#spinLogo');
-		  // console.log(logoJ);
-		  console.log(logo.style.height);
-		  console.log(logo.style.width);
 
 		  if (acc.x != null){
 		  	document.getElementById('x').innerHTML = acc.x.toString();
@@ -68,12 +81,12 @@ export class HomePage {
 		  	}
 		  }
 
-		  logo.style.height = (100 + (Math.abs(acc.y / 9.81)) * 100).toString() + 'px';
-		  logo.style.width = (100 + (Math.abs(acc.y / 9.81)) * 100).toString() + 'px';
-		  logo.style.margin = ((100 + (Math.abs(acc.y / 9.81)) * 100)/-2).toString() + 'px';
+		  // logo.style.height = (100 + (Math.abs(acc.y / 9.81)) * 100).toString() + 'px';
+		  // logo.style.width = (100 + (Math.abs(acc.y / 9.81)) * 100).toString() + 'px';
+		  // logo.style.margin = ((100 + (Math.abs(acc.y / 9.81)) * 100)/-2).toString() + 'px';
 
-		  svgCanvas.style.height = document.documentElement.clientHeight.toString() + 'px';
-		  svgCanvas.style.width = document.documentElement.clientWidth.toString() + 'px';
+		  logoR = (100 + (Math.abs(acc.y / 9.81)) * 100).toString();
+		  logo.setAttributeNS(null, "r", logoR);
 
 		});
 	}
