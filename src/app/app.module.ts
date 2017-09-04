@@ -9,8 +9,11 @@ import { HomePage } from '../pages/home/home';
 import { TabsPage } from '../pages/tabs/tabs';
 import { DetailPage } from '../pages/detail/detail';
 
+
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
+import { DeviceMotion, DeviceMotionAccelerationData } from '@ionic-native/device-motion';
+
 
 @NgModule({
   declarations: [
@@ -37,6 +40,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
   providers: [
     StatusBar,
     SplashScreen,
+    DeviceMotion,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })
